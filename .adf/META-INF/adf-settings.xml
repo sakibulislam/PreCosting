@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adf-settings xmlns="http://xmlns.oracle.com/adf/settings"
+              xmlns:wap="http://xmlns.oracle.com/adf/settings/share/http/config">
+<adf-faces-config xmlns="http://xmlns.oracle.com/adf/faces/settings">
+  <help-provider prefix = "PASYS_HELP_">
+    <help-provider-class>oracle.adf.view.rich.help.ResourceBundleHelpProvider</help-provider-class>
+    <property>
+      <property-name>baseName</property-name>
+      <value>view.resource.HelpTest</value>
+    </property>
+  </help-provider>
+</adf-faces-config>
+</adf-settings>

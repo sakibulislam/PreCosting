@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="QueryPageDef"
+                Package="mnj.mfg.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MnjMfgPrecostingHView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingHView1Iterator"/>
+    <searchRegion Criteria="SearchByDocNo"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="MnjMfgPrecostingHView1Iterator"
+                  id="SearchByDocNoQuery"/>
+    <invokeAction Binds="openSpecificPOC" id="openSpecificPOCEx"
+                  Refresh="always"/>
+    <invokeAction Binds="setSessionValues" id="setSesValues" Refresh="always"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MnjMfgPrecostingHView1Iterator"
+          id="MnjMfgPrecostingHView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingHView"
+                      Name="MnjMfgPrecostingHView10">
+        <AttrNames>
+          <Item Value="HeaderNo"/>
+          <Item Value="OrderProjectionNo"/>
+          <Item Value="BuyerId"/>
+          <Item Value="DropPeriod"/>
+          <Item Value="Brand"/>
+          <Item Value="StyleName"/>
+          <Item Value="StyleNo"/>
+          <Item Value="Fit"/>
+          <Item Value="EndUser"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="ColourWash"/>
+          <Item Value="OtherCharges"/>
+          <Item Value="LabTestCharges"/>
+          <Item Value="Print"/>
+          <Item Value="Commission"/>
+          <Item Value="SmsQty"/>
+          <Item Value="OrderQty"/>
+          <Item Value="CostingMou"/>
+          <Item Value="FabricFinance"/>
+          <Item Value="TrimFinance"/>
+          <Item Value="WashFinance"/>
+          <Item Value="ProductionUnit"/>
+          <Item Value="CmMerchandiser"/>
+          <Item Value="Buyer"/>
+          <Item Value="Season"/>
+          <Item Value="GmStatus"/>
+          <Item Value="VersionNo"/>
+          <Item Value="PocType"/>
+          <Item Value="ProdStyleNo"/>
+          <Item Value="Attachemnt"/>
+          <Item Value="StyleNameNew"/>
+          <Item Value="BpoQty"/>
+          <Item Value="CurrentStyleName"/>
+          <Item Value="CurrentStyleNo"/>
+          <Item Value="ConditionalProdStyleNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjMfgPrecostingHView1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjMfgPrecostingHView1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction IterBinding="MnjMfgPrecostingHView1Iterator"
+                  id="openSpecificPOC" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="openSpecificPOC"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="AppModuleDataControl.MnjMfgPrecostingHView1">
+      <NamedData NDName="POC" NDValue="#{viewScope.POCNO}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="CopyPrecost"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="CopyPrecost"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="setSessionValues"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="setSessionValues"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="userId" NDValue="#{viewScope.UserId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="orgId" NDValue="#{viewScope.OrgId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="respId" NDValue="#{viewScope.RespId}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="respApplId" NDValue="#{viewScope.RespApplId}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="CopyAllPrecost"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="CopyAllPrecost"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

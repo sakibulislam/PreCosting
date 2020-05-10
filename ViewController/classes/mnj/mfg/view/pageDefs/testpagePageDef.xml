@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="testpagePageDef"
+                Package="mnj.mfg.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MnjMfgPrecostingHView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingHView1Iterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="MnjMfgPrecostingLView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingLView1Iterator" ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="MnjMfgPrecostingLView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgPrecostingLView1Query"/>
+    <iterator Binds="MnjMfgPrecostingItemDView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingItemDView1Iterator" ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="MnjMfgPrecostingItemDView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgPrecostingItemDView1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="HeaderNo">
+      <AttrNames>
+        <Item Value="HeaderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="OrderProjectionNo">
+      <AttrNames>
+        <Item Value="OrderProjectionNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="BuyerId">
+      <AttrNames>
+        <Item Value="BuyerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="DropPeriod">
+      <AttrNames>
+        <Item Value="DropPeriod"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_Brand" id="Brand" DTSupportsMRU="false"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="StyleName">
+      <AttrNames>
+        <Item Value="StyleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="StyleNo">
+      <AttrNames>
+        <Item Value="StyleNo"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_Fit" id="Fit" DTSupportsMRU="false"/>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_EndUser" id="EndUser" DTSupportsMRU="false"/>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_ItemDescription" id="ItemDescription"
+          DTSupportsMRU="false"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="ColourWash">
+      <AttrNames>
+        <Item Value="ColourWash"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="OtherCharges">
+      <AttrNames>
+        <Item Value="OtherCharges"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="LabTestCharges">
+      <AttrNames>
+        <Item Value="LabTestCharges"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="Print">
+      <AttrNames>
+        <Item Value="Print"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="Commission">
+      <AttrNames>
+        <Item Value="Commission"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="SmsQty">
+      <AttrNames>
+        <Item Value="SmsQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="OrderQty">
+      <AttrNames>
+        <Item Value="OrderQty"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_CostingMou" id="CostingMou" DTSupportsMRU="false"/>
+    <action IterBinding="MnjMfgPrecostingHView1Iterator" id="First"
+            RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="MnjMfgPrecostingHView1Iterator" id="Previous"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="MnjMfgPrecostingHView1Iterator" id="Next"
+            RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="MnjMfgPrecostingHView1Iterator" id="Last"
+            RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="MnjMfgPrecostingLView1Iterator"
+          id="MnjMfgPrecostingLView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingLView"
+                      Name="MnjMfgPrecostingLView10">
+        <AttrNames>
+          <Item Value="HeaderNumber"/>
+          <Item Value="WashName"/>
+          <Item Value="Colour"/>
+          <Item Value="Rate"/>
+          <Item Value="FobWitoutComm"/>
+          <Item Value="FobWithComm"/>
+          <Item Value="FobWithSmsSample"/>
+          <Item Value="CmMerchandiser"/>
+          <Item Value="ReflectProfit"/>
+          <Item Value="Cost"/>
+          <Item Value="Finance"/>
+          <Item Value="Profit"/>
+          <Item Value="Cm"/>
+          <Item Value="ProdCostHour"/>
+          <Item Value="ProdPerHour"/>
+          <Item Value="BpoNo"/>
+          <Item Value="BpoQty"/>
+          <Item Value="ItemId"/>
+          <Item Value="Flag"/>
+          <Item Value="PoType"/>
+          <Item Value="ItemTotal"/>
+          <Item Value="WetTotal"/>
+          <Item Value="DryTotal"/>
+          <Item Value="OtherCharge"/>
+          <Item Value="LabTestCharge"/>
+          <Item Value="Print"/>
+          <Item Value="FabricFinance"/>
+          <Item Value="WashFinance"/>
+          <Item Value="TrimFinance"/>
+          <Item Value="CommisonPrcnt"/>
+          <Item Value="SmsQty"/>
+          <Item Value="FabricDesc"/>
+          <Item Value="CloneFlag"/>
+          <Item Value="Fob"/>
+          <Item Value="FabricCost"/>
+          <Item Value="TrimCost"/>
+          <Item Value="WashCost"/>
+          <Item Value="TargetPrice"/>
+          <Item Value="Difference"/>
+          <Item Value="Others"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="MnjMfgPrecostingItemDView1Iterator"
+          id="MnjMfgPrecostingItemDView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingItemDView"
+                      Name="MnjMfgPrecostingItemDView10">
+        <AttrNames>
+          <Item Value="ItemPrefix"/>
+          <Item Value="SupplierId"/>
+          <Item Value="RefCode"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Uom"/>
+          <Item Value="PaymentTermId"/>
+          <Item Value="DeliveryTermId"/>
+          <Item Value="Status"/>
+          <Item Value="ActualUnitPrice"/>
+          <Item Value="AddChargeLc"/>
+          <Item Value="AddPriceFob"/>
+          <Item Value="AddPriceMoq"/>
+          <Item Value="FinalUnitPrice"/>
+          <Item Value="ConsPerPcs"/>
+          <Item Value="WastageInPer"/>
+          <Item Value="WastageInQty"/>
+          <Item Value="ConsWithWastage"/>
+          <Item Value="Bufer"/>
+          <Item Value="FinalCons"/>
+          <Item Value="CostPerPcs"/>
+          <Item Value="AddDeductCost"/>
+          <Item Value="FinalCostPerPcs"/>
+          <Item Value="Remarks"/>
+          <Item Value="AddCrgPrcnt"/>
+          <Item Value="PriceUom"/>
+          <Item Value="UomConv"/>
+          <Item Value="FabFinanceCost"/>
+          <Item Value="PrefixDesc"/>
+          <Item Value="TotalFinalCostPerPcs"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

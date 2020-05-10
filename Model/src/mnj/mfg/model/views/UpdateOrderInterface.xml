@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UpdateOrderInterface"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.UpdateOrderInterface_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery>
+    <![CDATA[SELECT MnjMfgPrecostingUpdateEO.BPO_QTY,
+       MnjMfgPrecostingUpdateEO.CREATED_BY,
+       MnjMfgPrecostingUpdateEO.CREATION_DATE,
+       MnjMfgPrecostingUpdateEO.HEADER_ID,
+       MnjMfgPrecostingUpdateEO.HIST_ID,
+       MnjMfgPrecostingUpdateEO.LAST_UPDATE_DATE,
+       MnjMfgPrecostingUpdateEO.LAST_UPDATED_BY,
+       MnjMfgPrecostingUpdateEO.ORDER_NUMBER,
+       MnjMfgPrecostingUpdateEO.SALE_HEADER_ID,
+       MnjMfgPrecostingUpdateEO.SALE_LINE_ID,
+       MnjMfgPrecostingUpdateEO.SUB_COST_ID,
+       (select ooha.order_number
+          from oe_order_headers_all ooha
+         where ooha.header_id = MnjMfgPrecostingUpdateEO.Sale_Header_Id) order_number2,       
+       (select ooha.cust_po_number
+          from oe_order_headers_all ooha
+         where ooha.header_id = MnjMfgPrecostingUpdateEO.Sale_Header_Id) bpo_numner
+  FROM MNJ_MFG_PRECOSTING_UPDATE MnjMfgPrecostingUpdateEO]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="MnjMfgPrecostingUpdateEO"
+    Entity="mnj.mfg.model.entities.MnjMfgPrecostingUpdateEO"/>
+  <ViewAttribute
+    Name="BpoQty"
+    PrecisionRule="true"
+    EntityAttrName="BpoQty"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="BPO_QTY"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="CREATION_DATE">
+    <Properties>
+      <SchemaBasedProperties/>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HeaderId"
+    PrecisionRule="true"
+    EntityAttrName="HeaderId"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="HEADER_ID"/>
+  <ViewAttribute
+    Name="HistId"
+    PrecisionRule="true"
+    EntityAttrName="HistId"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="HIST_ID"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="OrderNumber"
+    PrecisionRule="true"
+    EntityAttrName="OrderNumber"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="ORDER_NUMBER"/>
+  <ViewAttribute
+    Name="SaleHeaderId"
+    PrecisionRule="true"
+    EntityAttrName="SaleHeaderId"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="SALE_HEADER_ID"/>
+  <ViewAttribute
+    Name="SaleLineId"
+    PrecisionRule="true"
+    EntityAttrName="SaleLineId"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="SALE_LINE_ID"/>
+  <ViewAttribute
+    Name="SubCostId"
+    PrecisionRule="true"
+    EntityAttrName="SubCostId"
+    EntityUsage="MnjMfgPrecostingUpdateEO"
+    AliasName="SUB_COST_ID"/>
+  <ViewAttribute
+    Name="OrderNumber2"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORDER_NUMBER2"
+    Expression="ORDER_NUMBER2"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BpoNumner"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BPO_NUMNER"
+    Expression="BPO_NUMNER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SingleSelect"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Boolean"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="BIT"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

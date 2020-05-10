@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="createOrderPageDef"
+                Package="mnj.mfg.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MnjMfgPrecostingLView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingLView1Iterator"/>
+    <searchRegion Binds="MnjMfgPrecostingLView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgPrecostingLView1Query"/>
+    <iterator Binds="CreateSaleOrderLinesVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="CreateSaleOrderLinesVO1Iterator"/>
+    <searchRegion Binds="CreateSaleOrderLinesVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CreateSaleOrderLinesVO1Query"/>
+    <iterator Binds="MnjMfgPrecostingHView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingHView1Iterator"/>
+    <iterator Binds="MnjPrecostCreateBpoDVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="MnjPrecostCreateBpoDVO1Iterator"/>
+    <searchRegion Binds="MnjPrecostCreateBpoDVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="MnjPrecostCreateBpoDVO1Query"/>
+    <invokeAction id="getBPOQty_Tot_Exe" Binds="getBPOQty_Tot"
+                  Refresh="always"/>
+    <iterator Binds="sizeHeaderVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="sizeHeaderVO1Iterator"
+              ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="sizeHeaderVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="sizeHeaderVO1Query"/>
+    <iterator Binds="CustMnjOntSoObinsline_DetailVO1" RangeSize="100"
+              DataControl="AppModuleDataControl"
+              id="CustMnjOntSoObinsline_DetailVO1Iterator"
+              ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="CustMnjOntSoObinsline_DetailVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CustMnjOntSoObinsline_DetailVO1Query"/>
+    <iterator Binds="CustMnjOntSoObinSizline_LineVO1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="CustMnjOntSoObinSizline_LineVO1Iterator"
+              ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="CustMnjOntSoObinSizline_LineVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="CustMnjOntSoObinSizline_LineVO1Query"/>
+    <iterator Binds="MnjMfgPrecostingQtyDView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingQtyDView1Iterator"/>
+    <searchRegion Binds="MnjMfgPrecostingQtyDView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgPrecostingQtyDView1Query"/>
+    <iterator Binds="TBABalanceQtyVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="TBABalanceQtyVO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="MnjMfgPrecostingLView1Iterator"
+          id="MnjMfgPrecostingLView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingLView"
+                      Name="MnjMfgPrecostingLView10">
+        <AttrNames>
+          <Item Value="HeaderNumber"/>
+          <Item Value="FabricDesc"/>
+          <Item Value="WashName"/>
+          <Item Value="Colour"/>
+          <Item Value="FobWitoutComm"/>
+          <Item Value="FobWithComm"/>
+          <Item Value="FobWithSmsSample"/>
+          <Item Value="BpoNo"/>
+          <Item Value="BpoQty"/>
+          <Item Value="PoType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CreateSaleOrderLinesVO1Iterator"
+          id="CreateSaleOrderLinesVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.CreateSaleOrderLinesVO"
+                      Name="CreateSaleOrderLinesVO10">
+        <AttrNames>
+         
+          <Item Value="HeaderNumber"/>
+          <Item Value="WashName"/>
+          <Item Value="BpoNo"/>
+          <Item Value="BpoQty"/>
+          <Item Value="Colour"/>
+          <Item Value="FobWithComm"/>
+          <Item Value="FobWithSmsSample"/>
+          <Item Value="FobWitoutComm"/>
+          <Item Value="PoType"/>
+          <Item Value="FabricDesc"/>
+          <Item Value="LineId"/>
+          <Item Value="Clasfic"/>
+          <Item Value="Incoterms"/>
+          <Item Value="Status"/>
+          <Item Value="Flag" Binds="Flag"/>
+          <Item Value="ChildStyleNo"/>
+          <Item Value="BpoStatus"/>
+          <Item Value="FabricContent"/>
+          <Item Value="Country"/>
+          <Item Value="ShipMode"/>
+           <Item Value="DeliveryStartDate"/>
+          <Item Value="DeliveryEndDate"/>
+          <Item Value="ReplaceBpo"/>
+          <Item Value="JobStatus"/>
+          <Item Value="OrderQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="MakeLinesClone"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="MakeLinesClone"
+                  IsViewObjectMethod="false"/>
+    <action id="Rollback" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="HeaderId">
+      <AttrNames>
+        <Item Value="HeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="createOrder"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createOrder"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.createOrder_AppModuleDataControl_dataProvider_createOrder_result">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="MnjPrecostCreateBpoDVO1Iterator" id="MnjPrecostCreateBpoDVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjPrecostCreateBpoDVO" Name="MnjPrecostCreateBpoDVO10">
+        <AttrNames>
+          <Item Value="FabricDesc"/>
+          <Item Value="WashName"/>
+          <Item Value="Color"/>
+          <Item Value="Fob"/>
+          <Item Value="BpoNo"/>
+          <Item Value="BpoQty"/>
+          <Item Value="Classfic"/>
+          <Item Value="Balance"/>
+          <Item Value="PoType"/>
+          <Item Value="Incoterms"/>
+          <Item Value="Status"/>
+          <Item Value="FlagD" Binds="FlagD"/>
+          <Item Value="BpoStatus"/>
+          <Item Value="Country"/>
+          <Item Value="DeliveryStartDate"/>
+          <Item Value="DeliveryEndDate"/>
+          <Item Value="ShipMode"/>
+          <Item Value="ReplaceBpo"/>
+          <Item Value="ChildStyleNo"/>
+          <Item Value="JobStatus"/>
+          <Item Value="OrderQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjPrecostCreateBpoDVO1Iterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjPrecostCreateBpoDVO1Iterator" id="Delete" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <button IterBinding="MnjPrecostCreateBpoDVO1Iterator" id="FlagD" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="FlagD"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="createBPODetailRow" InstanceName="AppModuleDataControl.dataProvider" DataControl="AppModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="createBPODetailRow" IsViewObjectMethod="false"/>
+    <methodAction id="createOrderLines" InstanceName="AppModuleDataControl.dataProvider" DataControl="AppModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="createOrderLines" IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.createOrderLines_AppModuleDataControl_dataProvider_createOrderLines_result">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+      <NamedData NDName="lineId" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="CreateSaleOrderLinesVO1Iterator" id="Flag" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Flag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="createTBAOrder"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createTBAOrder"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.createTBAOrder_AppModuleDataControl_dataProvider_createTBAOrder_result">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="UpdateBPO"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="UpdateBPO"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.UpdateBPO_AppModuleDataControl_dataProvider_UpdateBPO_result">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="CancelBPO"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="CancelBPO"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.CancelBPO_AppModuleDataControl_dataProvider_CancelBPO_result">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getBPOQty_Tot"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getBPOQty_Tot"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.getBPOQty_Tot_AppModuleDataControl_dataProvider_getBPOQty_Tot_result"/>
+    <methodAction id="UploadBPO_Block"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="UploadBPO_Block"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="ClearTempUploadBlock"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="ClearTempUploadBlock"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="sizeHeaderVO1Iterator" id="sizeHeaderVO1">
+      <nodeDefinition DefName="mnj.mfg.model.sizeBreakdown.sizeHeaderVO"
+                      Name="sizeHeaderVO10">
+        <AttrNames>
+          <Item Value="HeaderId"/>
+          <Item Value="PocNo"/>
+          <Item Value="PocHeaderId"/>
+          <Item Value="OrderedQuantity"/>
+          <Item Value="OrderQuantityUom"/>
+          <Item Value="Description"/>
+          <Item Value="LineNumber"/>
+          <Item Value="OcNo"/>
+          <Item Value="BuyerName"/>
+          <Item Value="Season"/>
+          <Item Value="DropPeriod"/>
+          <Item Value="Brand"/>
+          <Item Value="StyleName"/>
+          <Item Value="StyleNo"/>
+          <Item Value="Fit"/>
+          <Item Value="EndUser"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="BpoNo"/>
+          <Item Value="InventoryItemId"/>
+          <Item Value="CustomerId"/>
+          <Item Value="Attachemnt"/>
+          <Item Value="QtyTotal"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CustMnjOntSoObinsline_DetailVO1Iterator"
+          id="CustMnjOntSoObinsline_DetailVO1" ChangeEventPolicy="ppr">
+      <nodeDefinition DefName="mnj.mfg.model.sizeBreakdown.CustMnjOntSoObinsline_DetailVO"
+                      Name="CustMnjOntSoObinsline_DetailVO10">
+        <AttrNames>
+          <Item Value="SizeQty"/>
+          <Item Value="InseamSizeConcat"/>
+          <Item Value="SoObinslineId"/>
+          <Item Value="SoObinslineHId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CustMnjOntSoObinSizline_LineVO1Iterator"
+          id="CustMnjOntSoObinSizline_LineVO1">
+      <nodeDefinition DefName="mnj.mfg.model.sizeBreakdown.CustMnjOntSoObinSizline_LineVO"
+                      Name="CustMnjOntSoObinSizline_LineVO10">
+        <AttrNames>
+          <Item Value="SizeQty"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="Obrefno"/>
+          <Item Value="Inseam"/>
+          <Item Value="LegacyId"/>
+          <Item Value="SizeLabel"/>
+          <Item Value="LineCode"/>
+          <Item Value="SizeSno"/>
+          <Item Value="OrgId"/>
+          <Item Value="OcNo"/>
+          <Item Value="SizeP"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="Uom"/>
+          <Item Value="PackingType"/>
+          <Item Value="InseamQty"/>
+          <Item Value="Country"/>
+          <Item Value="ToDate"/>
+          <Item Value="CuttOff"/>
+          <Item Value="DcpoNo"/>
+          <Item Value="DeliveryDate"/>
+          <Item Value="DeliveryTerm"/>
+          <Item Value="ShipMode"/>
+          <Item Value="InventoryItemId"/>
+          <Item Value="DeliveryEndDate"/>
+          <Item Value="DeliveryStartDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="CustMnjOntSoObinsline_DetailVO1Iterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="CustMnjOntSoObinSizline_LineVO1Iterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="sizeHeaderVO1Iterator" id="QtyTotal">
+      <AttrNames>
+        <Item Value="QtyTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CustMnjOntSoObinSizline_LineVO1Iterator"
+                     id="TotalSizeQuantity">
+      <AttrNames>
+        <Item Value="TotalSizeQuantity"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="CustMnjOntSoObinsline_DetailVO1Iterator"
+            id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <tree IterBinding="MnjMfgPrecostingQtyDView1Iterator"
+          id="MnjMfgPrecostingQtyDView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingQtyDView"
+                      Name="MnjMfgPrecostingQtyDView10">
+        <AttrNames>
+          <Item Value="Classification"/>
+          <Item Value="BreakdownQty"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjMfgPrecostingQtyDView1Iterator" id="Delete3"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="TBABalanceQtyVO1Iterator" id="BalanceQty">
+      <AttrNames>
+        <Item Value="BalanceQty"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

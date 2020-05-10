@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjMfgPrecostingCountryDView"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  SelectList="MnjMfgPrecostingCountryD.DETAIL_ID, 
+       MnjMfgPrecostingCountryD.LINE_ID, 
+       MnjMfgPrecostingCountryD.COUNTRY, 
+       MnjMfgPrecostingCountryD.RATE"
+  FromList="MNJ_MFG_PRECOSTING_COUNTRY_D MnjMfgPrecostingCountryD"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+  </DesignTime>
+  <EntityUsage
+    Name="MnjMfgPrecostingCountryD"
+    Entity="mnj.mfg.model.entities.MnjMfgPrecostingCountryD"/>
+  <ViewAttribute
+    Name="DetailId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DetailId"
+    EntityUsage="MnjMfgPrecostingCountryD"
+    AliasName="DETAIL_ID"/>
+  <ViewAttribute
+    Name="LineId"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="MnjMfgPrecostingCountryD"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="Country"
+    PrecisionRule="true"
+    EntityAttrName="Country"
+    EntityUsage="MnjMfgPrecostingCountryD"
+    AliasName="COUNTRY"/>
+  <ViewAttribute
+    Name="Rate"
+    PrecisionRule="true"
+    EntityAttrName="Rate"
+    EntityUsage="MnjMfgPrecostingCountryD"
+    AliasName="RATE"/>
+</ViewObject>

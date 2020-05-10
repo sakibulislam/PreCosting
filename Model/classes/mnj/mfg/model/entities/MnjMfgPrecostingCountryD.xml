@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MnjMfgPrecostingCountryD"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  DBObjectType="table"
+  DBObjectName="MNJ_MFG_PRECOSTING_COUNTRY_D"
+  AliasName="MnjMfgPrecostingCountryD"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="mnj.mfg.model.entities.MnjMfgPrecostingCountryDImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="DetailId"
+    IsNotNull="true"
+    ColumnName="DETAIL_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_PRECOSTING_COUNTRY_D"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LineId"
+    ColumnName="LINE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_PRECOSTING_COUNTRY_D">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Country"
+    Precision="500"
+    ColumnName="COUNTRY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="MNJ_MFG_PRECOSTING_COUNTRY_D">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Rate"
+    ColumnName="RATE"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="MNJ_MFG_PRECOSTING_COUNTRY_D">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="MnjMfgPrecostingL"
+    Association="mnj.mfg.model.entities.MnjMfgPrecostingCountryFk1Assoc"
+    AssociationEnd="mnj.mfg.model.entities.MnjMfgPrecostingCountryFk1Assoc.MnjMfgPrecostingL"
+    AssociationOtherEnd="mnj.mfg.model.entities.MnjMfgPrecostingCountryFk1Assoc.MnjMfgPrecostingCountryD"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="MnjMfgPrecostingCountryPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="MNJ_MFG_PRECOSTING_COUNTRY_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjMfgPrecostingCountryD.DetailId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="MnjMfgPrecostingCountryFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="MNJ_MFG_PRECOSTING_L_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="MNJ_MFG_PRECOSTING_COUNTRY_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.entities.MnjMfgPrecostingCountryD.LineId"/>
+    </AttrArray>
+  </Key>
+</Entity>

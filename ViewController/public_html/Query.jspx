@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <f:view>
+    <af:document id="d1">
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelHeader text="Pre Costing Form" id="ph1"
+                        inlineStyle="height:174px;">
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    value="#{bindings.SearchByDocNoQuery.queryDescriptor}"
+                    model="#{bindings.SearchByDocNoQuery.queryModel}"
+                    queryListener="#{bindings.SearchByDocNoQuery.processQuery}"
+                    queryOperationListener="#{bindings.SearchByDocNoQuery.processQueryOperation}"
+                    resultComponentId="::pc1:t1"/>
+          <af:panelCollection id="pc1"
+                              inlineStyle="height:595px; "
+                              styleClass="AFStretchWidth">
+            <f:facet name="menus">
+              <af:menu text="Actions" id="m2" rendered="false">
+                <af:commandMenuItem text="Copy" id="cmi1"
+                                    actionListener="#{CallDBObjectsBean.CallCopy}"/>
+                <af:commandMenuItem text="Edit" id="cmi2"
+                                    actionListener="#{CallDBObjectsBean.CallVersion}"/>
+                <af:commandMenuItem text="Copy All" id="cmi3"
+                                    actionListener="#{CallDBObjectsBean.CallAllCopy}"/>
+              </af:menu>
+            </f:facet>
+            <f:facet name="toolbar">
+              <af:toolbar id="t2">
+                <af:commandButton actionListener="#{bindings.CreateInsert.execute}"
+                                  text="Create"
+                                  id="cb1" action="goEdit"
+                                  inlineStyle="height:30px;"
+                                  partialSubmit="true" immediate="true"/>
+                <af:commandButton text="Open" id="cb5" action="goEdit"
+                                  inlineStyle="height:30px;"
+                                  partialSubmit="true" immediate="true"/>
+                <af:commandButton actionListener="#{bindings.Commit.execute}"
+                                  text="Save"
+                                  disabled="#{!bindings.Commit.enabled}"
+                                  id="cb3" inlineStyle="height:30px;"/>
+                <af:commandButton actionListener="#{bindings.Rollback.execute}"
+                                  text="Undo"
+                                  disabled="#{!bindings.Rollback.enabled}"
+                                  immediate="true" id="cb4"
+                                  inlineStyle="height:30px;">
+                  <af:resetActionListener/>
+                </af:commandButton>
+                <af:commandButton text="COPY" id="cb2"
+                                  inlineStyle="height:30px;"
+                                  actionListener="#{CallDBObjectsBean.CallCopy}"/>
+                <af:commandButton text="VERSION" id="cb6"
+                                  inlineStyle="height:30px;"
+                                  actionListener="#{CallDBObjectsBean.CallVersion}"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.MnjMfgPrecostingHView1.collectionModel}"
+                      var="row"
+                      rows="#{bindings.MnjMfgPrecostingHView1.rangeSize}"
+                      emptyText="#{bindings.MnjMfgPrecostingHView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      fetchSize="#{bindings.MnjMfgPrecostingHView1.rangeSize}"
+                      rowBandingInterval="1"
+                      filterModel="#{bindings.SearchByDocNoQuery.queryDescriptor}"
+                      queryListener="#{bindings.SearchByDocNoQuery.processQuery}"
+                      filterVisible="true" varStatus="vs"
+                      selectedRowKeys="#{bindings.MnjMfgPrecostingHView1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.MnjMfgPrecostingHView1.collectionModel.makeCurrent}"
+                      rowSelection="single" id="t1" partialTriggers="::cb1 cl1"
+                      binding="#{CallDBObjectsBean.queryTable}">
+              <af:column id="c4" headerText="Doc Ref. No" align="center">
+                <af:column sortProperty="HeaderNo" filterable="true"
+                           sortable="true" headerText="Pre Costing No" id="c23"
+                           align="center"
+                           inlineStyle="height:35px; text-align: center; font-size: 12px; font-family:'OpenSans-Bold';   font-weight: bold; background-image: none; vertical-align: middle; border-left: 1px solid ;"
+                           width="40" filterFeatures="caseInsensitive">
+                  <af:inputText value="#{row.bindings.HeaderNo.inputValue}"
+                                label="#{bindings.MnjMfgPrecostingHView1.hints.HeaderNo.label}"
+                                required="#{bindings.MnjMfgPrecostingHView1.hints.HeaderNo.mandatory}"
+                                columns="#{bindings.MnjMfgPrecostingHView1.hints.HeaderNo.displayWidth}"
+                                maximumLength="#{bindings.MnjMfgPrecostingHView1.hints.HeaderNo.precision}"
+                                shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.HeaderNo.tooltip}"
+                                id="it8" readOnly="true">
+                    <f:validator binding="#{row.bindings.HeaderNo.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column headerText="Version No." id="c5" align="center"
+                           filterable="true" sortable="true"
+                           sortProperty="VersionNo" width="32"
+                           filterFeatures="caseInsensitive">
+                  <af:inputText value="#{row.bindings.VersionNo.inputValue}"
+                                label="#{bindings.MnjMfgPrecostingHView1.hints.VersionNo.label}"
+                                required="#{bindings.MnjMfgPrecostingHView1.hints.VersionNo.mandatory}"
+                                columns="#{bindings.MnjMfgPrecostingHView1.hints.VersionNo.displayWidth}"
+                                maximumLength="#{bindings.MnjMfgPrecostingHView1.hints.VersionNo.precision}"
+                                shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.VersionNo.tooltip}"
+                                id="it3" readOnly="true">
+                    <f:validator binding="#{row.bindings.VersionNo.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.MnjMfgPrecostingHView1.hints.VersionNo.format}"/>
+                  </af:inputText>
+                </af:column>
+              </af:column>
+              <af:column headerText="Buyer" id="c1" align="center"
+                         sortable="true" filterable="true" sortProperty="Buyer"
+                         width="120" filterFeatures="caseInsensitive">
+                <af:inputText value="#{row.bindings.Buyer.inputValue}"
+                              label="#{bindings.MnjMfgPrecostingHView1.hints.Buyer.label}"
+                              required="#{bindings.MnjMfgPrecostingHView1.hints.Buyer.mandatory}"
+                              columns="#{bindings.MnjMfgPrecostingHView1.hints.Buyer.displayWidth}"
+                              maximumLength="#{bindings.MnjMfgPrecostingHView1.hints.Buyer.precision}"
+                              shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.Buyer.tooltip}"
+                              id="it1" readOnly="true">
+                  <f:validator binding="#{row.bindings.Buyer.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="Season" id="c2" align="center"
+                         sortable="true" sortProperty="Season" filterable="true"
+                         filterFeatures="caseInsensitive" width="80">
+                <af:selectOneChoice value="#{row.bindings.Season.inputValue}"
+                                    label="#{row.bindings.Season.label}"
+                                    required="#{bindings.MnjMfgPrecostingHView1.hints.Season.mandatory}"
+                                    shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.Season.tooltip}"
+                                    id="soc1" readOnly="true"
+                                    autoSubmit="true">
+                  <f:selectItems value="#{row.bindings.Season.items}" id="si1"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column sortProperty="DropPeriod" filterable="true"
+                         sortable="true" headerText="Drop /Period " id="c10"
+                         align="center" filterFeatures="caseInsensitive"
+                         width="70" rendered="false">
+                <af:inputText value="#{row.bindings.DropPeriod.inputValue}"
+                              label="#{bindings.MnjMfgPrecostingHView1.hints.DropPeriod.label}"
+                              required="#{bindings.MnjMfgPrecostingHView1.hints.DropPeriod.mandatory}"
+                              columns="#{bindings.MnjMfgPrecostingHView1.hints.DropPeriod.displayWidth}"
+                              maximumLength="#{bindings.MnjMfgPrecostingHView1.hints.DropPeriod.precision}"
+                              shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.DropPeriod.tooltip}"
+                              id="it7" readOnly="true">
+                  <f:validator binding="#{row.bindings.DropPeriod.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="Brand" sortable="true" headerText="Brand"
+                         id="c22" align="center" filterable="true"
+                         filterFeatures="caseInsensitive" width="60">
+                <af:selectOneChoice value="#{row.bindings.Brand.inputValue}"
+                                    label="#{row.bindings.Brand.label}"
+                                    required="#{bindings.MnjMfgPrecostingHView1.hints.Brand.mandatory}"
+                                    shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.Brand.tooltip}"
+                                    id="soc2" readOnly="true">
+                  <f:selectItems value="#{row.bindings.Brand.items}" id="si2"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column headerText="Style Name " id="c9" align="center"
+                         sortProperty="StyleNameNew" sortable="true"
+                         filterable="true" filterFeatures="caseInsensitive"
+                         width="230">
+                <af:outputText value="#{row.StyleNameNew}" id="ot2"/>
+              </af:column>
+              <af:column headerText="End User/Division "
+                         id="c15" rendered="true" align="center"
+                         sortable="true" filterable="true"
+                         sortProperty="EndUser"
+                         filterFeatures="caseInsensitive" width="60">
+                <af:selectOneChoice value="#{row.bindings.EndUser.inputValue}"
+                                    label="#{row.bindings.EndUser.label}"
+                                    required="#{bindings.MnjMfgPrecostingHView1.hints.EndUser.mandatory}"
+                                    shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.EndUser.tooltip}"
+                                    id="soc4" readOnly="true">
+                  <f:selectItems value="#{row.bindings.EndUser.items}"
+                                 id="si4"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column headerText="POC Type" id="c8" align="center"
+                         sortable="true" filterable="true"
+                         sortProperty="PocType" filterFeatures="caseInsensitive"
+                         width="70" rendered="false">
+                <af:selectOneChoice value="#{row.bindings.PocType.inputValue}"
+                                    label="#{row.bindings.PocType.label}"
+                                    required="#{bindings.MnjMfgPrecostingHView1.hints.PocType.mandatory}"
+                                    shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.PocType.tooltip}"
+                                    id="soc3" readOnly="true">
+                  <f:selectItems value="#{row.bindings.PocType.items}"
+                                 id="si3"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column headerText="Current Style No."
+                         id="c19" align="center" sortable="true"
+                         filterable="true"
+                         sortProperty="ConditionalProdStyleNo" width="200"
+                         filterFeatures="caseInsensitive">
+                <af:outputText value="#{row.ConditionalProdStyleNo}" id="ot5"/>
+              </af:column>
+              <af:column headerText="Prod. Style No." id="c11" align="center"
+                         sortable="true" filterable="true"
+                         sortProperty="StyleNo" filterFeatures="caseInsensitive"
+                         width="200" rendered="false">
+                <af:inputText value="#{row.bindings.StyleNo.inputValue}"
+                              label="#{bindings.MnjMfgPrecostingHView1.hints.StyleNo.label}"
+                              required="#{bindings.MnjMfgPrecostingHView1.hints.StyleNo.mandatory}"
+                              columns="#{bindings.MnjMfgPrecostingHView1.hints.StyleNo.displayWidth}"
+                              maximumLength="#{bindings.MnjMfgPrecostingHView1.hints.StyleNo.precision}"
+                              shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.StyleNo.tooltip}"
+                              id="it4" readOnly="true">
+                  <f:validator binding="#{row.bindings.StyleNo.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="Prod. Style No."
+                         id="c17" align="center" sortable="true"
+                         filterable="true" sortProperty="CurrentStyleName"
+                         width="200" rendered="false">
+                <af:outputText value="#{row.CurrentStyleName}" id="ot3"/>
+              </af:column>
+              <af:column headerText="Prod. Style No."
+                         id="c18" align="center" sortable="true"
+                         filterable="true" sortProperty="CurrentStyleNo"
+                         width="200" rendered="false">
+                <af:outputText value="#{row.CurrentStyleNo}" id="ot4"/>
+              </af:column>
+              <af:column headerText="LA Dev. Style No" id="c12" align="center"
+                         sortable="true" filterable="true"
+                         sortProperty="ProdStyleNo"
+                         filterFeatures="caseInsensitive" width="80"
+                         rendered="false">
+                <af:outputText value="#{row.ProdStyleNo}" id="ot1"/>
+              </af:column>
+              <af:column headerText="Approval Status" id="c3" sortable="true"
+                         filterable="true" align="center"
+                         sortProperty="GmStatus"
+                         filterFeatures="caseInsensitive" width="70">
+                <af:inputText value="#{row.bindings.GmStatus.inputValue}"
+                              label="#{bindings.MnjMfgPrecostingHView1.hints.GmStatus.label}"
+                              required="#{bindings.MnjMfgPrecostingHView1.hints.GmStatus.mandatory}"
+                              columns="#{bindings.MnjMfgPrecostingHView1.hints.GmStatus.displayWidth}"
+                              maximumLength="#{bindings.MnjMfgPrecostingHView1.hints.GmStatus.precision}"
+                              shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.GmStatus.tooltip}"
+                              id="it2" readOnly="true" autoSubmit="true">
+                  <f:validator binding="#{row.bindings.GmStatus.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="Entered TBA/BPO Qty"
+                         id="c14" align="center" sortable="true"
+                         filterable="true" sortProperty="BpoQty" width="130"
+                         filterFeatures="caseInsensitive">
+                <af:inputText value="#{row.bindings.BpoQty.inputValue}"
+                              label="#{bindings.MnjMfgPrecostingHView1.hints.BpoQty.label}"
+                              required="#{bindings.MnjMfgPrecostingHView1.hints.BpoQty.mandatory}"
+                              columns="#{bindings.MnjMfgPrecostingHView1.hints.BpoQty.displayWidth}"
+                              maximumLength="#{bindings.MnjMfgPrecostingHView1.hints.BpoQty.precision}"
+                              shortDesc="#{bindings.MnjMfgPrecostingHView1.hints.BpoQty.tooltip}"
+                              id="it5" readOnly="true" autoSubmit="true">
+                  <f:validator binding="#{row.bindings.BpoQty.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column id="c6" align="center" width="63">
+                <af:commandLink text="Create BPOs" id="cl2" action="goCreateBPO"
+                                disabled="#{row.bindings.GmStatus.inputValue=='Approved'? 'false':'true'}"/>
+              </af:column>
+              <af:column id="c16" width="55" align="center">
+                <af:commandLink text="Go to BOM" id="cl4"
+                                actionListener="#{ManagedBean.goToBom}"/>
+              </af:column>
+              <af:column id="c7" align="center" width="34">
+                <af:commandLink actionListener="#{bindings.Delete.execute}"
+                                text="Delete"
+                                disabled="#{row.bindings.GmStatus.inputValue=='Approved'? 'true':'false'}"
+                                id="cl1"/>
+              </af:column>
+              <af:column headerText="Attachment" id="c13" align="center"
+                         width="60" visible="false">
+                <af:commandLink text="#{row.bindings.Attachemnt.inputValue=='0'? '...' : row.bindings.Attachemnt.inputValue}"
+                                id="cl3"
+                                action="#{ManagedBean.callAttachment}"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelHeader>
+      </af:form>
+    </af:document>
+  </f:view>
+</jsp:root>

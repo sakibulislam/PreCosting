@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TBABalanceQtyVLink"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.TBABalanceQtyVLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="TBABalanceQtyVO"
+    Cardinality="1"
+    Owner="mnj.mfg.model.views.CreateSaleOrderLinesVO"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="CreateSaleOrderLinesVO_2"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.views.CreateSaleOrderLinesVO.LineId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="CreateSaleOrderLinesVO"
+    Cardinality="-1"
+    Owner="mnj.mfg.model.views.TBABalanceQtyVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="TBABalanceQtyVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.views.TBABalanceQtyVO.LineId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

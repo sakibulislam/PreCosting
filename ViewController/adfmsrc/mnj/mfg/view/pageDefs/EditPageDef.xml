@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.62.29" id="EditPageDef"
+                Package="mnj.mfg.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MnjMfgPrecostingHView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingHView1Iterator"/>
+    <iterator Binds="MnjMfgPrecostingLView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingLView1Iterator"/>
+    <searchRegion Binds="MnjMfgPrecostingLView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgPrecostingLView1Query"/>
+    <iterator Binds="MnjMfgPrecostingItemDView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingItemDView1Iterator"/>
+    <searchRegion Binds="MnjMfgPrecostingItemDView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgPrecostingItemDView1Query"/>
+    <iterator Binds="MnjMfgPrecostingWetDView1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="MnjMfgPrecostingWetDView1Iterator"/>
+    <searchRegion Binds="MnjMfgPrecostingWetDView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MnjMfgPrecostingWetDView1Query"/>
+    <iterator Binds="DryDetailVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="DryDetailVO1Iterator"/>
+    <searchRegion Binds="DryDetailVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="DryDetailVO1Query"/>
+    <iterator Binds="UpdateOrderInterface1" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="UpdateOrderInterface1Iterator"/>
+    <searchRegion Binds="UpdateOrderInterface1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="UpdateOrderInterface1Query"/>
+    <iterator Binds="POCLinesCopyVO1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="POCLinesCopyVO1Iterator"/>
+    <searchRegion Binds="POCLinesCopyVO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="POCLinesCopyVO1Query"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="HeaderNo">
+      <AttrNames>
+        <Item Value="HeaderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="StyleNo">
+      <AttrNames>
+        <Item Value="StyleNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="SmsQty">
+      <AttrNames>
+        <Item Value="SmsQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="OrderQty">
+      <AttrNames>
+        <Item Value="OrderQty"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="FabricFinance">
+      <AttrNames>
+        <Item Value="FabricFinance"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="CmMerchandiser">
+      <AttrNames>
+        <Item Value="CmMerchandiser"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <tree IterBinding="MnjMfgPrecostingLView1Iterator"
+          id="MnjMfgPrecostingLView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingLView"
+                      Name="MnjMfgPrecostingLView10">
+        <AttrNames>
+          <Item Value="HeaderNumber"/>
+          <Item Value="WashName"/>
+          <Item Value="Colour"/>
+          <Item Value="Rate"/>
+          <Item Value="FobWitoutComm"/>
+          <Item Value="FobWithComm"/>
+          <Item Value="FobWithSmsSample"/>
+          <Item Value="LineId"/>
+          <Item Value="SmsQty"/>
+          <Item Value="FabricDesc"/>
+          <Item Value="Fob"/>
+          <Item Value="FabricCost"/>
+          <Item Value="TrimCost"/>
+          <Item Value="WashCost"/>
+          <Item Value="Cm"/>
+          <Item Value="TargetPrice"/>
+          <Item Value="Difference"/>
+          <Item Value="Others"/>
+          <Item Value="ChildStyleNo"/>
+          <Item Value="Weight"/>
+          <Item Value="WeightType"/>
+          <Item Value="WidthValue"/>
+          <Item Value="WidthType"/>
+          <Item Value="FabricFinsih"/>
+          <Item Value="Elongation"/>
+          <Item Value="FabricContent"/>
+          <Item Value="Remarks"/>
+          <Item Value="FinalFinishGoodsColour"/>
+          <Item Value="ItemId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjMfgPrecostingLView1Iterator" id="CreateInsert"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjMfgPrecostingLView1Iterator" id="Delete"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="MnjMfgPrecostingItemDView1Iterator"
+          id="MnjMfgPrecostingItemDView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingItemDView"
+                      Name="MnjMfgPrecostingItemDView10">
+        <AttrNames>
+          <Item Value="ItemPrefix"/>
+          <Item Value="RefCode"/>
+          <Item Value="ItemDesc"/>
+          <Item Value="Uom"/>
+          <Item Value="PaymentTermId"/>
+          <Item Value="DeliveryTermId"/>
+          <Item Value="Status"/>
+          <Item Value="ActualUnitPrice"/>
+          <Item Value="AddChargeLc"/>
+          <Item Value="AddPriceFob"/>
+          <Item Value="AddPriceMoq"/>
+          <Item Value="FinalUnitPrice"/>
+          <Item Value="ConsPerPcs"/>
+          <Item Value="WastageInPer"/>
+          <Item Value="WastageInQty"/>
+          <Item Value="ConsWithWastage"/>
+          <Item Value="Bufer"/>
+          <Item Value="FinalCons"/>
+          <Item Value="CostPerPcs"/>
+          <Item Value="AddDeductCost"/>
+          <Item Value="FinalCostPerPcs"/>
+          <Item Value="Remarks"/>
+          <Item Value="PrefixDesc"/>
+          <Item Value="TotalFinalCostPerPcs"/>
+          <Item Value="AddCrgPrcnt"/>
+          <Item Value="PriceUom"/>
+          <Item Value="UomConv"/>
+          <Item Value="LineId"/>
+          <Item Value="FabFinanceCost"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="MnjMfgPrecostingItemDView1Iterator" id="CreateInsert1"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjMfgPrecostingItemDView1Iterator" id="Delete1"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="MnjMfgPrecostingWetDView1Iterator"
+          id="MnjMfgPrecostingWetDView1">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingWetDView"
+                      Name="MnjMfgPrecostingWetDView10">
+        <AttrNames>
+          <Item Value="ProcessName"/>
+          <Item Value="CostAmount"/>
+          <Item Value="Profit"/>
+          <Item Value="NewTotalVal"/>
+          <Item Value="ManualPrice"/>
+          <Item Value="CostUom"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="Cost">
+      <AttrNames>
+        <Item Value="Cost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="Finance">
+      <AttrNames>
+        <Item Value="Finance"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="Profit">
+      <AttrNames>
+        <Item Value="Profit"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="Cm">
+      <AttrNames>
+        <Item Value="Cm"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingItemDView1Iterator"
+                     id="PrefixDesc">
+      <AttrNames>
+        <Item Value="PrefixDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false"
+                  IterBinding="MnjMfgPrecostingHView1Iterator"
+                  Uses="LOV_ProductionUnit" id="ProductionUnit"/>
+    <methodAction id="getCostProdPerLine"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getCostProdPerLine"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.getCostProdPerLine_AppModuleDataControl_dataProvider_getCostProdPerLine_result">
+      <NamedData NDName="name" NDType="java.lang.String"/>
+      <NamedData NDName="projectionNo" NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="MnjMfgPrecostingWetDView1Iterator" id="CreateInsert3"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="MnjMfgPrecostingWetDView1Iterator" id="Delete3"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="ItemTotal">
+      <AttrNames>
+        <Item Value="ItemTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="WetTotal">
+      <AttrNames>
+        <Item Value="WetTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="DryDetailVO1Iterator" id="DryDetailVO1">
+      <nodeDefinition DefName="mnj.mfg.model.views.DryDetailVO"
+                      Name="DryDetailVO10">
+        <AttrNames>
+          <Item Value="ProcessName"/>
+          <Item Value="CostAmount"/>
+          <Item Value="ManualPrice"/>
+          <Item Value="Profit"/>
+          <Item Value="Total"/>
+          <Item Value="CostUom"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="DryDetailVO1Iterator" id="CreateInsert2"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="DryDetailVO1Iterator" id="Delete2"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="DryTotal">
+      <AttrNames>
+        <Item Value="DryTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="HeaderId">
+      <AttrNames>
+        <Item Value="HeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="copyRecords"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="copyRecords"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.copyRecords_AppModuleDataControl_dataProvider_copyRecords_result">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+      <NamedData NDName="lineId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="createItems"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createItems"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.createItems_AppModuleDataControl_dataProvider_createItems_result">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="OrderProjectionNo">
+      <AttrNames>
+        <Item Value="OrderProjectionNo"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false"
+                  IterBinding="MnjMfgPrecostingHView1Iterator"
+                  Uses="LOV_BuyerCriteria" id="BuyerCriteria"/>
+    <tree IterBinding="MnjMfgPrecostingLView1Iterator"
+          id="MnjMfgPrecostingLView11">
+      <nodeDefinition DefName="mnj.mfg.model.views.MnjMfgPrecostingLView"
+                      Name="MnjMfgPrecostingLView110">
+        <AttrNames>
+          <Item Value="WashName"/>
+          <Item Value="BpoNo"/>
+          <Item Value="BpoQty"/>
+          <Item Value="Flag" Binds="Flag"/>
+          <Item Value="Colour"/>
+          <Item Value="PoType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="MnjMfgPrecostingLView1Iterator" id="Flag"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Flag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="createOrder"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createOrder"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.createOrder_AppModuleDataControl_dataProvider_createOrder_result">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="UpdateOrderInterface1Iterator"
+          id="UpdateOrderInterface1">
+      <nodeDefinition DefName="mnj.mfg.model.views.UpdateOrderInterface"
+                      Name="UpdateOrderInterface10">
+        <AttrNames>
+          <Item Value="BpoQty"/>
+          <Item Value="HeaderId"/>
+          <Item Value="HistId"/>
+          <Item Value="OrderNumber"/>
+          <Item Value="SaleHeaderId"/>
+          <Item Value="SaleLineId"/>
+          <Item Value="SubCostId"/>
+          <Item Value="OrderNumber2"/>
+          <Item Value="SingleSelect"/>
+          <Item Value="BpoNumner"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="updateOrder"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="updateOrder"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.updateOrder_AppModuleDataControl_dataProvider_updateOrder_result">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <listOfValues StaticList="false"
+                  IterBinding="MnjMfgPrecostingHView1Iterator" Uses="LOV_Buyer"
+                  id="Buyer"/>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_Fit" id="Fit" DTSupportsMRU="true"/>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_ItemDescription" id="ItemDescription" DTSupportsMRU="true"/>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_Season" id="Season" DTSupportsMRU="true"/>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_Brand" id="Brand" DTSupportsMRU="true"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="BuyerId">
+      <AttrNames>
+        <Item Value="BuyerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="CmMerchandiserD">
+      <AttrNames>
+        <Item Value="CmMerchandiserD"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="Approve" InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="Approve"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="ApproveNForward"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="ApproveNForward"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="headerId" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator" id="GmStatus">
+      <AttrNames>
+        <Item Value="GmStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="GmApproval">
+      <AttrNames>
+        <Item Value="GmApproval"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="MnjMfgPrecostingHView1Iterator"
+                  id="openSpecificPOC" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="openSpecificPOC"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="AppModuleDataControl.MnjMfgPrecostingHView1">
+      <NamedData NDName="POC" NDValue="#{viewScope.POCNO}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction IterBinding="MnjMfgPrecostingLView1Iterator" id="ExecuteLines"
+                  RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="ExecuteLines" IsViewObjectMethod="true"
+                  DataControl="AppModuleDataControl"
+                  InstanceName="AppModuleDataControl.MnjMfgPrecostingLView1">
+      <NamedData NDName="POC" NDValue="#{viewScope.POCNO}"
+                 NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="MnjMfgPrecostingHView1Iterator"
+            id="setCurrentRowWithKey"
+            InstanceName="AppModuleDataControl.MnjMfgPrecostingHView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKey" NDValue="#{viewScope.POCNO}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="createLines"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="createLines"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.createLines_AppModuleDataControl_dataProvider_createLines_result"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="SampleDocNo">
+      <AttrNames>
+        <Item Value="SampleDocNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="VersionNo">
+      <AttrNames>
+        <Item Value="VersionNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="VersionDate">
+      <AttrNames>
+        <Item Value="VersionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_EndUser" id="EndUser" DTSupportsMRU="true"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="DropPeriod">
+      <AttrNames>
+        <Item Value="DropPeriod"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_CostingMou" id="CostingMou1" DTSupportsMRU="true"/>
+    <list IterBinding="MnjMfgPrecostingHView1Iterator" StaticList="false"
+          Uses="LOV_PocType" id="PocType" DTSupportsMRU="true"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="ProdStyleNo">
+      <AttrNames>
+        <Item Value="ProdStyleNo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="refreshProdCostLineWise"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="refreshProdCostLineWise"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="unitName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getPOCFinCost"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getPOCFinCost"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.getPOCFinCost_AppModuleDataControl_dataProvider_getPOCFinCost_result">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getProdCostUnitWise"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="getProdCostUnitWise"
+                  IsViewObjectMethod="false"
+                  ReturnName="data.AppModuleDataControl.methodResults.getProdCostUnitWise_AppModuleDataControl_dataProvider_getProdCostUnitWise_result">
+      <NamedData NDName="unitName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="refreshCreateBPODetail" InstanceName="AppModuleDataControl.dataProvider" DataControl="AppModuleDataControl"
+                  RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshCreateBPODetail"
+                  IsViewObjectMethod="false"/>
+    <methodAction id="CopyItemsDetail"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="CopyItemsDetail"
+                  IsViewObjectMethod="false"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="StyleNameNew">
+      <AttrNames>
+        <Item Value="StyleNameNew"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="StyleTracking"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="StyleTracking"
+                  IsViewObjectMethod="false"/>
+    <tree IterBinding="POCLinesCopyVO1Iterator" id="POCLinesCopyVO11">
+      <nodeDefinition DefName="mnj.mfg.model.views.POCLinesCopyVO"
+                      Name="POCLinesCopyVO110">
+        <AttrNames>
+          <Item Value="MultiSelect"/>
+          <Item Value="PocNo"/>
+          <Item Value="StyleNo"/>
+          <Item Value="LineId"/>
+          <Item Value="SubcostingNo"/>
+          <Item Value="FabricDesc"/>
+          <Item Value="WashName"/>
+          <Item Value="Colour"/>
+          <Item Value="ChildStyleNo"/>
+          <Item Value="FabricCost"/>
+          <Item Value="TrimCost"/>
+          <Item Value="WashCost"/>
+          <Item Value="Others"/>
+          <Item Value="Cm"/>
+          <Item Value="FobWithComm"/>
+          <Item Value="StyleNameNew"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="CurrentStyleName">
+      <AttrNames>
+        <Item Value="CurrentStyleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="CurrentStyleNo">
+      <AttrNames>
+        <Item Value="CurrentStyleNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="CmMerchand">
+      <AttrNames>
+        <Item Value="CmMerchand"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="StyleEfficiency">
+      <AttrNames>
+        <Item Value="StyleEfficiency"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="Sam">
+      <AttrNames>
+        <Item Value="Sam"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="FactoryAvgEf">
+      <AttrNames>
+        <Item Value="FactoryAvgEf"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="ProdCostLinePerH">
+      <AttrNames>
+        <Item Value="ProdCostLinePerH"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="CostNew">
+      <AttrNames>
+        <Item Value="CostNew"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator" id="Smv">
+      <AttrNames>
+        <Item Value="Smv"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="ProdPerLinePerH1">
+      <AttrNames>
+        <Item Value="ProdPerLinePerH"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="TotalCost">
+      <AttrNames>
+        <Item Value="TotalCost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="CmManagement">
+      <AttrNames>
+        <Item Value="CmManagement"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="FobWithComm">
+      <AttrNames>
+        <Item Value="FobWithComm"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="CommisonPrcnt">
+      <AttrNames>
+        <Item Value="CommisonPrcnt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingLView1Iterator"
+                     id="OtherCharge">
+      <AttrNames>
+        <Item Value="OtherCharge"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false"
+                  IterBinding="MnjMfgPrecostingHView1Iterator"
+                  Uses="LOV_StyleTracking" id="StyleTracking1"/>
+    <listOfValues StaticList="false"
+                  IterBinding="MnjMfgPrecostingHView1Iterator"
+                  Uses="LOV_Division" id="Division"/>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="TrimFinance">
+      <AttrNames>
+        <Item Value="TrimFinance"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MnjMfgPrecostingHView1Iterator"
+                     id="WashFinance">
+      <AttrNames>
+        <Item Value="WashFinance"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false"
+                  IterBinding="MnjMfgPrecostingHView1Iterator"
+                  Uses="LOV_ItemPurchaseType" id="ItemPurchaseType"/>
+  </bindings>
+</pageDefinition>

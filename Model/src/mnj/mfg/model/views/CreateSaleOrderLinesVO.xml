@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CreateSaleOrderLinesVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.CreateSaleOrderLinesVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="POTypeVO1"
+    ViewObjectName="mnj.mfg.model.lov.POTypeVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ClassficVVO1"
+    ViewObjectName="mnj.mfg.model.lov.ClassficVVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="DeliverTermVO1"
+    ViewObjectName="mnj.mfg.model.lov.DeliverTermVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BPOStatusVO1"
+    ViewObjectName="mnj.mfg.model.lov.BPOStatusVO"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ShipModeLOV1"
+    ViewObjectName="mnj.mfg.model.lov.views.ShipModeLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BuyerWiseCountryLOV1"
+    ViewObjectName="mnj.mfg.model.lov.BuyerWiseCountryLOV">
+    <ParameterMap>
+      <PIMap Variable="p_id">
+        <TransientExpression><![CDATA[BuyerId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_PoType"
+    ListVOName="POTypeVO1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_PoType_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PoType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Clasfic"
+    ListVOName="ClassficVVO1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_Clasfic_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Clasfic"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Incoterms"
+    ListVOName="DeliverTermVO1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_Incoterms_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Incoterms"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Status"
+    ListVOName="BPOStatusVO1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ShipMode"
+    ListVOName="ShipModeLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ShipMode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="ShipMode"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Country"
+    ListVOName="BuyerWiseCountryLOV1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_Country_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Country"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Country"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Country"/>
+      <Item Value="BuyerId"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[/* Formatted on 7/18/2019 3:07:41 PM (QP5 v5.256.13226.35510) */
+SELECT MnjMfgPrecostingL.BPO_NO,
+       MnjMfgPrecostingL.BPO_QTY,
+       MnjMfgPrecostingL.CM,
+       MnjMfgPrecostingL.CM_MERCHANDISER,
+       MnjMfgPrecostingL.COLOUR,
+       MnjMfgPrecostingL.COMMISON_PRCNT,
+       MnjMfgPrecostingL.COST,
+       MnjMfgPrecostingL.FABRIC_DESC,
+       MnjMfgPrecostingL.FABRIC_FINANCE,
+       MnjMfgPrecostingL.FINANCE,
+       MnjMfgPrecostingL.FLAG,
+       MnjMfgPrecostingL.FOB_WITH_COMM,
+       MnjMfgPrecostingL.FOB_WITH_SMS_SAMPLE,
+       MnjMfgPrecostingL.FOB_WITOUT_COMM,
+       MnjMfgPrecostingL.HEADER_ID,
+       MnjMfgPrecostingL.HEADER_NUMBER,
+       MnjMfgPrecostingL.ITEM_ID,
+       MnjMfgPrecostingL.LAB_TEST_CHARGE,
+       MnjMfgPrecostingL.LINE_ID,
+       MnjMfgPrecostingL.OTHER_CHARGE,
+       MnjMfgPrecostingL.PO_TYPE,
+       MnjMfgPrecostingL.PRINT,
+       MnjMfgPrecostingL.PROD_COST_HOUR,
+       MnjMfgPrecostingL.PROD_PER_HOUR,
+       MnjMfgPrecostingL.PROFIT,
+       MnjMfgPrecostingL.RATE,
+       MnjMfgPrecostingL.REFLECT_PROFIT,
+       MnjMfgPrecostingL.REQUEST_ID,
+       MnjMfgPrecostingL.SMS_QTY,
+       MnjMfgPrecostingL.TRIM_FINANCE,
+       MnjMfgPrecostingL.WASH_FINANCE,
+       MnjMfgPrecostingL.WASH_NAME,
+       MnjMfgPrecostingL.CLONE_FLAG,
+       MnjMfgPrecostingL.CLONE_ROW_ID,
+       MnjMfgPrecostingL.CLASFIC,
+       MnjMfgPrecostingL.INCOTERMS,
+       MnjMfgPrecostingL.STATUS,
+       MnjMfgPrecostingL.CHILD_STYLE_NO,
+       MnjMfgPrecostingL.SHIP_MODE,
+       MnjMfgPrecostingL.COUNTRY,
+       MnjMfgPrecostingL.SALE_LINE_ID,
+       MnjMfgPrecostingL.SALE_HEADER_ID,
+       (SELECT OOHA.FLOW_STATUS_CODE
+          FROM  OE_ORDER_HEADERS_ALL OOHA,OE_ORDER_LINES_ALL OOLA
+         WHERE    1=1 
+         and OOHA.HEADER_ID = OOLA.HEADER_ID
+               AND OOHA.HEADER_ID=MnjMfgPrecostingL.SALE_HEADER_ID
+               AND OOLA.LINE_ID=MnjMfgPrecostingL.SALE_Line_ID
+               AND ROWNUM = 1)
+          BPO_STATUS,
+       (CASE
+           WHEN (SELECT wdijob.status_type
+                   FROM WIP_DISCRETE_JOBS_V wdijob
+                  WHERE     wdijob.PRIMARY_ITEM_ID =
+                               MnjMfgPrecostingL.item_id
+                        AND wdijob.ATTRIBUTE5 =
+                               (SELECT customer_name
+                                  FROM ar_customers ac
+                                 WHERE ac.CUSTOMER_ID =
+                                          MnjMfgPrecostingH.Buyer_Id)
+                        AND wdijob.ATTRIBUTE6 =
+                               CASE
+                                  WHEN MnjMfgPrecostingH.division =
+                                          'Style No.'
+                                  THEN
+                                     MnjMfgPrecostingH.style_no
+                                  WHEN MnjMfgPrecostingH.division =
+                                          'Style Name'
+                                  THEN
+                                     MnjMfgPrecostingH.Style_Name_New
+                                  WHEN MnjMfgPrecostingH.division =
+                                          'Other/BPO No.'
+                                  THEN
+                                     MnjMfgPrecostingL.BPO_No
+                               END
+                        AND wdijob.ATTRIBUTE7 = MnjMfgPrecostingH.season
+                        AND wdijob.ATTRIBUTE8 = MnjMfgPrecostingL.colour
+                        AND wdijob.ATTRIBUTE9 = MnjMfgPrecostingL.wash_name
+                        AND ROWNUM = 1) = '12'
+           THEN
+              'CLOSE'
+        END)
+          JOB_STATUS,
+          (select lines.ORDERED_QUANTITY from oe_order_headers_all headers,oe_order_lines_all lines
+            where 1=1
+            and headers.header_id=lines.header_id
+            and headers.header_id=MnjMfgPrecostingL.SALE_HEADER_ID
+            and lines.line_id=MnjMfgPrecostingL.SALE_LINE_ID) Order_Qty,
+       MnjMfgPrecostingL.FABRIC_CONTENT,
+       MnjMfgPrecostingL.DELIVERY_END_DATE,
+       MnjMfgPrecostingL.DELIVERY_START_DATE,
+       MnjMfgPrecostingL.REPLACE_BPO,
+       MnjMfgPrecostingH.BUYER_ID
+  FROM MNJ_MFG_PRECOSTING_L MnjMfgPrecostingL,
+       MNJ_MFG_PRECOSTING_H MnjMfgPrecostingH
+ WHERE MnjMfgPrecostingH.HEADER_ID = MnjMfgPrecostingL.HEADER_ID]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="MnjMfgPrecostingL"
+    Entity="mnj.mfg.model.entities.MnjMfgPrecostingL"/>
+  <ViewAttribute
+    Name="BpoNo"
+    PrecisionRule="true"
+    EntityAttrName="BpoNo"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="BPO_NO"/>
+  <ViewAttribute
+    Name="BpoQty"
+    PrecisionRule="true"
+    EntityAttrName="BpoQty"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="BPO_QTY"/>
+  <ViewAttribute
+    Name="Cm"
+    PrecisionRule="true"
+    EntityAttrName="Cm"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="CM"/>
+  <ViewAttribute
+    Name="CmMerchandiser"
+    PrecisionRule="true"
+    EntityAttrName="CmMerchandiser"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="CM_MERCHANDISER"/>
+  <ViewAttribute
+    Name="Colour"
+    PrecisionRule="true"
+    EntityAttrName="Colour"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="COLOUR"/>
+  <ViewAttribute
+    Name="CommisonPrcnt"
+    PrecisionRule="true"
+    EntityAttrName="CommisonPrcnt"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="COMMISON_PRCNT"/>
+  <ViewAttribute
+    Name="Cost"
+    PrecisionRule="true"
+    EntityAttrName="Cost"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="COST"/>
+  <ViewAttribute
+    Name="FabricDesc"
+    PrecisionRule="true"
+    EntityAttrName="FabricDesc"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="FABRIC_DESC"/>
+  <ViewAttribute
+    Name="FabricFinance"
+    PrecisionRule="true"
+    EntityAttrName="FabricFinance"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="FABRIC_FINANCE"/>
+  <ViewAttribute
+    Name="Finance"
+    PrecisionRule="true"
+    EntityAttrName="Finance"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="FINANCE"/>
+  <ViewAttribute
+    Name="Flag"
+    PrecisionRule="true"
+    EntityAttrName="Flag"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="FLAG"/>
+  <ViewAttribute
+    Name="FobWithComm"
+    PrecisionRule="true"
+    EntityAttrName="FobWithComm"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="FOB_WITH_COMM"/>
+  <ViewAttribute
+    Name="FobWithSmsSample"
+    PrecisionRule="true"
+    EntityAttrName="FobWithSmsSample"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="FOB_WITH_SMS_SAMPLE"/>
+  <ViewAttribute
+    Name="FobWitoutComm"
+    PrecisionRule="true"
+    EntityAttrName="FobWitoutComm"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="FOB_WITOUT_COMM"/>
+  <ViewAttribute
+    Name="HeaderId"
+    PrecisionRule="true"
+    EntityAttrName="HeaderId"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="HEADER_ID"/>
+  <ViewAttribute
+    Name="HeaderNumber"
+    PrecisionRule="true"
+    EntityAttrName="HeaderNumber"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="HEADER_NUMBER"/>
+  <ViewAttribute
+    Name="ItemId"
+    PrecisionRule="true"
+    EntityAttrName="ItemId"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="ITEM_ID"/>
+  <ViewAttribute
+    Name="LabTestCharge"
+    PrecisionRule="true"
+    EntityAttrName="LabTestCharge"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="LAB_TEST_CHARGE"/>
+  <ViewAttribute
+    Name="LineId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="OtherCharge"
+    PrecisionRule="true"
+    EntityAttrName="OtherCharge"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="OTHER_CHARGE"/>
+  <ViewAttribute
+    Name="PoType"
+    PrecisionRule="true"
+    EntityAttrName="PoType"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="PO_TYPE"
+    LOVName="LOV_PoType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Print"
+    PrecisionRule="true"
+    EntityAttrName="Print"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="PRINT"/>
+  <ViewAttribute
+    Name="ProdCostHour"
+    PrecisionRule="true"
+    EntityAttrName="ProdCostHour"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="PROD_COST_HOUR"/>
+  <ViewAttribute
+    Name="ProdPerHour"
+    PrecisionRule="true"
+    EntityAttrName="ProdPerHour"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="PROD_PER_HOUR"/>
+  <ViewAttribute
+    Name="Profit"
+    PrecisionRule="true"
+    EntityAttrName="Profit"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="PROFIT"/>
+  <ViewAttribute
+    Name="Rate"
+    PrecisionRule="true"
+    EntityAttrName="Rate"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="RATE"/>
+  <ViewAttribute
+    Name="ReflectProfit"
+    PrecisionRule="true"
+    EntityAttrName="ReflectProfit"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="REFLECT_PROFIT"/>
+  <ViewAttribute
+    Name="RequestId"
+    PrecisionRule="true"
+    EntityAttrName="RequestId"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="REQUEST_ID"/>
+  <ViewAttribute
+    Name="SmsQty"
+    PrecisionRule="true"
+    EntityAttrName="SmsQty"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="SMS_QTY"/>
+  <ViewAttribute
+    Name="TrimFinance"
+    PrecisionRule="true"
+    EntityAttrName="TrimFinance"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="TRIM_FINANCE"/>
+  <ViewAttribute
+    Name="WashFinance"
+    PrecisionRule="true"
+    EntityAttrName="WashFinance"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="WASH_FINANCE"/>
+  <ViewAttribute
+    Name="WashName"
+    PrecisionRule="true"
+    EntityAttrName="WashName"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="WASH_NAME"/>
+  <ViewAttribute
+    Name="CloneFlag"
+    PrecisionRule="true"
+    EntityAttrName="CloneFlag"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="CLONE_FLAG"/>
+  <ViewAttribute
+    Name="CloneRowId"
+    PrecisionRule="true"
+    EntityAttrName="CloneRowId"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="CLONE_ROW_ID"/>
+  <ViewAttribute
+    Name="Clasfic"
+    PrecisionRule="true"
+    EntityAttrName="Clasfic"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="CLASFIC"
+    LOVName="LOV_Clasfic">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Incoterms"
+    PrecisionRule="true"
+    EntityAttrName="Incoterms"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="INCOTERMS"
+    LOVName="LOV_Incoterms">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="STATUS"
+    LOVName="LOV_Status">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="combo"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ChildStyleNo"
+    PrecisionRule="true"
+    AliasName="CHILD_STYLE_NO"
+    EntityAttrName="ChildStyleNo"
+    EntityUsage="MnjMfgPrecostingL"/>
+  <ViewAttribute
+    Name="ShipMode"
+    PrecisionRule="true"
+    EntityAttrName="ShipMode"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="SHIP_MODE"
+    LOVName="LOV_ShipMode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Country"
+    PrecisionRule="true"
+    EntityAttrName="Country"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="COUNTRY"
+    LOVName="LOV_Country">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SaleLineId"
+    PrecisionRule="true"
+    EntityAttrName="SaleLineId"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="SALE_LINE_ID"/>
+  <ViewAttribute
+    Name="SaleHeaderId"
+    PrecisionRule="true"
+    EntityAttrName="SaleHeaderId"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="SALE_HEADER_ID"/>
+  <ViewAttribute
+    Name="BpoStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BPO_STATUS"
+    Expression="BPO_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JobStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="JOB_STATUS"
+    Expression="JOB_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORDER_QTY"
+    Expression="ORDER_QTY"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FabricContent"
+    PrecisionRule="true"
+    EntityAttrName="FabricContent"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="FABRIC_CONTENT"/>
+  <ViewAttribute
+    Name="DeliveryEndDate"
+    PrecisionRule="true"
+    EntityAttrName="DeliveryEndDate"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="DELIVERY_END_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="mnj.mfg.model.views.CreateSaleOrderLinesVO.DeliveryEndDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DeliveryStartDate"
+    PrecisionRule="true"
+    EntityAttrName="DeliveryStartDate"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="DELIVERY_START_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="mnj.mfg.model.views.CreateSaleOrderLinesVO.DeliveryStartDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReplaceBpo"
+    PrecisionRule="true"
+    EntityAttrName="ReplaceBpo"
+    EntityUsage="MnjMfgPrecostingL"
+    AliasName="REPLACE_BPO"/>
+  <ViewAttribute
+    Name="BuyerId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="BUYER_ID"
+    Expression="BUYER_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <AUTOSUBMIT
+          Value="true"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ChildBpoQtySum"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <TransientExpression><![CDATA[MnjPrecostCreateBpoDVO.sum('BpoQty')]]></TransientExpression>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="MnjPrecostCreateBpoDVO"
+    ViewLink="mnj.mfg.model.views.CreateBPOLinesDetVL"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="MnjMfgPrecostingQtyDView"
+    ViewLink="mnj.mfg.model.views.MnjMfgPrecostingQtyDViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

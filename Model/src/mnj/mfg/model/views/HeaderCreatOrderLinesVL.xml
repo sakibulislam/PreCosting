@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="HeaderCreatOrderLinesVL"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  EntityAssociation="mnj.mfg.model.entities.MnjMfgPrecostingLFkAssoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.HeaderCreatOrderLinesVL_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="MnjMfgPrecostingHView"
+    Cardinality="1"
+    Owner="mnj.mfg.model.views.MnjMfgPrecostingHView"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="MnjMfgPrecostingHView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.views.MnjMfgPrecostingHView.HeaderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="CreateSaleOrderLinesVO"
+    Cardinality="-1"
+    Owner="mnj.mfg.model.views.CreateSaleOrderLinesVO">
+    <DesignTime>
+      <Attr Name="_finderName" Value="CreateSaleOrderLinesVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="mnj.mfg.model.views.CreateSaleOrderLinesVO.HeaderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

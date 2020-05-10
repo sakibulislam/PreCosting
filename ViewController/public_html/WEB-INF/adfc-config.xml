@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="Query">
+    <page>/Query.jspx</page>
+    <input-page-parameter>
+      <from-value>#{param.ParamOrgId}</from-value>
+      <to-value>#{viewScope.OrgId}</to-value>
+    </input-page-parameter>
+    <input-page-parameter>
+      <from-value>#{param.ParamUserId}</from-value>
+      <to-value>#{viewScope.UserId}</to-value>
+    </input-page-parameter>
+    <input-page-parameter>
+      <from-value>#{param.ParamRespId}</from-value>
+      <to-value>#{viewScope.RespId}</to-value>
+    </input-page-parameter>
+    <input-page-parameter>
+      <from-value>#{param.ParamRespApplId}</from-value>
+      <to-value>#{viewScope.RespApplId}</to-value>
+    </input-page-parameter>
+    <input-page-parameter>
+      <from-value>#{param.POC}</from-value>
+      <to-value>#{viewScope.POCNO}</to-value>
+    </input-page-parameter>
+  </view>
+  <view id="Edit">
+    <page>/Edit.jspx</page>
+    <input-page-parameter>
+      <from-value>#{param.POC}</from-value>
+      <to-value>#{viewScope.POCNO}</to-value>
+    </input-page-parameter>
+  </view>
+  <view id="createOrder">
+    <page>/createOrder.jspx</page>
+  </view>
+  <control-flow-rule id="__1">
+    <from-activity-id id="__2">Query</from-activity-id>
+    <control-flow-case id="__3">
+      <from-outcome id="__9">goEdit</from-outcome>
+      <to-activity-id id="__4">Edit</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__35">
+      <from-outcome id="__36">goCreateBPO</from-outcome>
+      <to-activity-id id="__34">createOrder</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__5">
+    <from-activity-id id="__6">Edit</from-activity-id>
+    <control-flow-case id="__7">
+      <from-outcome id="__10">goBrowse</from-outcome>
+      <to-activity-id id="__8">Query</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__27">
+      <from-outcome id="__28">goCreateOrder</from-outcome>
+      <to-activity-id id="__26">createOrder</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__29">
+    <from-activity-id id="__30">createOrder</from-activity-id>
+    <control-flow-case id="__32">
+      <from-outcome id="__33">backToQuery</from-outcome>
+      <to-activity-id id="__31">Query</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__49">
+      <from-outcome id="__51">backToEdit</from-outcome>
+      <to-activity-id id="__50">Edit</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__13">
+    <managed-bean-name id="__12">ManagedBean</managed-bean-name>
+    <managed-bean-class id="__11">view.backing.bean.Main</managed-bean-class>
+    <managed-bean-scope id="__14">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__18">
+    <managed-bean-name id="__16">popopBean</managed-bean-name>
+    <managed-bean-class id="__15">view.backing.bean.PopUpBean</managed-bean-class>
+    <managed-bean-scope id="__17">request</managed-bean-scope>
+    <managed-property id="__23">
+      <property-name id="__22">myBean</property-name>
+      <property-class>view.backing.bean.Main</property-class>
+      <value id="__24">#{requestScope.ManagedBean}</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__20">
+    <managed-bean-name id="__25">CallDBObjectsBean</managed-bean-name>
+    <managed-bean-class id="__21">view.backing.bean.DbObjectsCall</managed-bean-class>
+    <managed-bean-scope id="__19">request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__40">
+    <managed-bean-name id="__38">sizeBreakDownBean</managed-bean-name>
+    <managed-bean-class id="__37">sizeBreakDownBean</managed-bean-class>
+    <managed-bean-scope id="__39">backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__44">
+    <managed-bean-name id="__41">sizeBreakdownBean</managed-bean-name>
+    <managed-bean-class id="__42">view.backing.bean.sizeBreakdownBean</managed-bean-class>
+    <managed-bean-scope id="__43">backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__48">
+    <managed-bean-name id="__47">sizeBreakdownBackingBean</managed-bean-name>
+    <managed-bean-class id="__45">view.backing.bean.sizeBreakdown</managed-bean-class>
+    <managed-bean-scope id="__46">backingBean</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

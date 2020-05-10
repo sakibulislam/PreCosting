@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DryDetailVO"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  SelectList="MnjMfgPrecostingDryD.COST_AMOUNT, 
+       MnjMfgPrecostingDryD.DETAIL_ID, 
+       MnjMfgPrecostingDryD.LINE_ID, 
+       MnjMfgPrecostingDryD.MANUAL_PRICE, 
+       MnjMfgPrecostingDryD.PROCESS_ID, 
+       MnjMfgPrecostingDryD.PROCESS_NAME, 
+       MnjMfgPrecostingDryD.PROFIT, 
+       MnjMfgPrecostingDryD.TOTAL, 
+       MnjMfgPrecostingDryD.COST_UOM"
+  FromList="MNJ_MFG_PRECOSTING_DRY_D MnjMfgPrecostingDryD"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  UseGlueCode="false"
+  ComponentClass="mnj.mfg.model.views.DryDetailVOImpl"
+  RowClass="mnj.mfg.model.views.DryDetailVORowImpl"
+  OrderBy="DETAIL_ID">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.views.DryDetailVO_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="CostingUOMLov1"
+    ViewObjectName="mnj.mfg.model.lov.CostingUOMLov"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="WashProcessDryVO1"
+    ViewObjectName="mnj.mfg.model.lov.WashProcessDryVO"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_CostUom"
+    ListVOName="CostingUOMLov1"
+    ListRangeSize="10"
+    NullValueFlag="none"
+    NullValueId="LOV_CostUom_LOVUIHints_NullValueId"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CostUom"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <EntityUsage
+    Name="MnjMfgPrecostingDryD"
+    Entity="mnj.mfg.model.entities.MnjMfgPrecostingDryD"/>
+  <ViewAttribute
+    Name="CostAmount"
+    PrecisionRule="true"
+    EntityAttrName="CostAmount"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="COST_AMOUNT"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="DetailId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="DetailId"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="DETAIL_ID"/>
+  <ViewAttribute
+    Name="LineId"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="ManualPrice"
+    PrecisionRule="true"
+    EntityAttrName="ManualPrice"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="MANUAL_PRICE"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="ProcessId"
+    PrecisionRule="true"
+    EntityAttrName="ProcessId"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="PROCESS_ID"/>
+  <ViewAttribute
+    Name="ProcessName"
+    PrecisionRule="true"
+    EntityAttrName="ProcessName"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="PROCESS_NAME"/>
+  <ViewAttribute
+    Name="Profit"
+    PrecisionRule="true"
+    EntityAttrName="Profit"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="PROFIT"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="Total"
+    PrecisionRule="true"
+    EntityAttrName="Total"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="TOTAL"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="CostUom"
+    PrecisionRule="true"
+    EntityAttrName="CostUom"
+    EntityUsage="MnjMfgPrecostingDryD"
+    AliasName="COST_UOM"
+    LOVName="LOV_CostUom"
+    DefaultValue="DOZ">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,5 @@
+The following Synchronization Actions were performed successfully:
+
+Entity :MnjMfgPrecostingL
+  Create Attribute for column: TARGET_PRICE
+  Create Attribute for column: DIFFERENCE

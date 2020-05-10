@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BuyerWiseCountryForD"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  UseGlueCode="false">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="mnj.mfg.model.lov.BuyerWiseCountryForD_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="Buyer"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <SQLQuery>
+    <![CDATA[SELECT    ftt.TERRITORY_SHORT_NAME, hca1.CUST_ACCOUNT_ID, hca1.ACCOUNT_NUMBER, NVL(hl.address4, 'BPO Line') DCPO,hl.COUNTRY,ftt.TERRITORY_SHORT_NAME ||'-'|| hl.COUNTRY Short_Name
+  FROM 
+       hz_cust_accounts hca1, 
+       hz_parties             hp,
+       hz_party_sites         hps,
+       hz_locations           hl,
+       hz_cust_accounts_all   hca,
+       hz_cust_acct_sites_all hcsa,
+       hz_cust_site_uses_all  hcsu,
+       fnd_territories_tl     ftt
+ WHERE hp.party_id = hps.party_id
+   AND hps.location_id = hl.location_id
+   AND hp.party_id = hca.party_id
+   AND hca1.PARTY_ID=hca.party_id
+   AND hcsa.party_site_id = hps.party_site_id
+   AND hcsu.cust_acct_site_id = hcsa.cust_acct_site_id
+   AND hca.cust_account_id = hcsa.cust_account_id
+   and hcsu.site_use_code = 'SHIP_TO'
+   and hps.status = 'A'
+  -- and  hca1.cust_account_id =34244
+   and ftt.territory_code = hl.country]]>
+  </SQLQuery>
+  <ViewAttribute
+    Name="TerritoryShortName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TERRITORY_SHORT_NAME"
+    Expression="TERRITORY_SHORT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustAccountId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="CUST_ACCOUNT_ID"
+    Expression="CUST_ACCOUNT_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccountNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCOUNT_NUMBER"
+    Expression="ACCOUNT_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Dcpo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DCPO"
+    Expression="DCPO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Country"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY"
+    Expression="COUNTRY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShortName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="141"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHORT_NAME"
+    Expression="SHORT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="141"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="BuyerWiseCountryForDCriteria"
+    ViewObjectName="mnj.mfg.model.lov.BuyerWiseCountryForD"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow13"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CustAccountId"
+        ViewAttribute="CustAccountId"
+        Operator="="
+        Conjunction="AND"
+        Value=":Buyer"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="mnj.mfg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>
